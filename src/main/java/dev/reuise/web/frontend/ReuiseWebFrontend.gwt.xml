@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><module>
+    <inherits name="dev.reuise.web.core.ReuiseWeb"/>
+    <inherits name="com.github.nmorel.gwtjackson.GwtJackson"/>
+    <inherits name="akasha.Akasha"/>
+    <inherits name="java.util.JavaUtil"/>
+    <inherits name="java.time.JavaTime"/>
+    <extend-configuration-property name="gwtjackson.configuration.extension" value="dev.reuise.web.frontend.document.JacksonConfig"/>
+    <source path=""/>
+</module>

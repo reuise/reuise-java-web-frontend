@@ -1,20 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>dev.reuise</groupId>
   <artifactId>reuise-web-frontend</artifactId>
-  <version>1.0.0</version>
-  <name>Reuise for Java: Web frontend</name>
-  <build>
-    <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
-    <outputDirectory>${basedir}/target/classes</outputDirectory>
-  </build>
+  <version>0.8.2-beta</version>
+  <packaging>gwt-lib</packaging>
+  <name>Reuise for Java (Web frontend)</name>
+  <distributionManagement>
+    <repository>
+      <id>github-reuise-web-frontend</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/reuise/reuise-java-web-frontend</url>
+    </repository>
+  </distributionManagement>
+  <properties>
+    <maven.compiler.target>17</maven.compiler.target>
+    <java.version>17</java.version>
+    <maven.compiler.source>17</maven.compiler.source>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>dev.reuise</groupId>
       <artifactId>reuise-web-core</artifactId>
-      <version>1.0.0</version>
+      <version>0.8.2-beta</version>
+    </dependency>
+    <dependency>
+      <groupId>org.gwtproject</groupId>
+      <artifactId>gwt-user</artifactId>
+      <version>2.13.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.gwtproject</groupId>
+      <artifactId>gwt-dev</artifactId>
+      <version>2.13.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.nmorel.gwtjackson</groupId>
+      <artifactId>gwt-jackson</artifactId>
+      <version>0.15.4</version>
+    </dependency>
+    <dependency>
+      <groupId>org.realityforge.akasha</groupId>
+      <artifactId>akasha-gwt</artifactId>
+      <version>0.31</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -23,9 +52,60 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-  <properties>
-    <maven.compiler.target>11</maven.compiler.target>
-    <java.version>11</java.version>
-    <maven.compiler.source>11</maven.compiler.source>
-  </properties>
+  <repositories>
+    <repository>
+      <id>local-mirror</id>
+      <url>file://${user.home}/.m2/repository</url>
+    </repository>
+    <repository>
+      <id>github-reuise-web-core</id>
+      <url>https://maven.pkg.github.com/reuise/reuise-java-web-core</url>
+    </repository>
+  </repositories>
+  <build>
+    <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+    <outputDirectory>${basedir}/target/classes</outputDirectory>
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.java</include>
+          <include>**/*.gwt.xml</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/main/super</directory>
+        <includes>
+          <include>**/*.java</include>
+          <include>**/*.gwt.xml</include>
+        </includes>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.3.0</version>
+      </plugin>
+      <plugin>
+        <groupId>net.ltgt.gwt.maven</groupId>
+        <artifactId>gwt-maven-plugin</artifactId>
+        <version>1.0.1</version>
+        <extensions>true</extensions>
+        <configuration>
+          <moduleName>dev.reuise.web.frontend.ReuiseWebFrontend</moduleName>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
