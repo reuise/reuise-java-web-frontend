@@ -28,6 +28,7 @@ import dev.reuise.web.frontend.WebFrontendComponentFactory;
 import dev.reuise.web.frontend.WebFrontendComponentType;
 import dev.reuise.web.frontend.basecomponent.WebFrontendBaseComponentPart;
 import dev.reuise.web.frontend.button.WebFrontendButton;
+import dev.reuise.web.frontend.button.WebFrontendButtonBar;
 import dev.reuise.web.frontend.event.BooleanEventHandler;
 import dev.reuise.web.frontend.layout.WebFrontendContainer;
 import dev.reuise.web.frontend.layout.WebFrontendFlexContainer;
@@ -37,8 +38,9 @@ import dev.reuise.web.frontend.text.WebFrontendHeading;
 import dev.reuise.webstyles.Style;
 import dev.reuise.webstyles.StyleBuilder;
 import dev.reuise.webstyles.StyleSheetFactory;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 // Option: Children - CORE
 // Option: ElementProvider - WEB_FRONTEND
@@ -151,8 +153,6 @@ public abstract class DefaultWebFrontendDialog<S extends DefaultWebFrontendDialo
     protected BooleanEventHandler acceptHandler;
 
     protected BooleanEventHandler cancelHandler;
-
-    protected List<CoreButton> actions;
 
     protected DefaultWebFrontendDialog(O options) {
         super(options);
@@ -588,8 +588,8 @@ public abstract class DefaultWebFrontendDialog<S extends DefaultWebFrontendDialo
     }
 
     @Override
-    public WebFrontendFlexContainer getFooter() {
-        return ((WebFrontendFlexContainer) (super.getFooter()));
+    public WebFrontendButtonBar getFooter() {
+        return ((WebFrontendButtonBar) (super.getFooter()));
     }
 
     @Override
@@ -641,37 +641,8 @@ public abstract class DefaultWebFrontendDialog<S extends DefaultWebFrontendDialo
     }
 
     @Override
-    public List<CoreButton> getActions() {
-        return actions;
-    }
-
-    // Implementation
-    @Override
-    public S setActions(List<CoreButton> actions) {
-        return self();
-    }
-
-    // Implementation
-    @Override
-    public S addAction(CoreButton action) {
-        return self();
-    }
-
-    // Implementation
-    @Override
     public S setAction(CoreButton action) {
-        return self();
-    }
-
-    // Implementation
-    @Override
-    public S removeAction(CoreButton action) {
-        return self();
-    }
-
-    @Override
-    public S clearActions() {
-        this.actions.clear();
+        setActions(new ArrayList<CoreButton>(Arrays.asList(action)));
         return self();
     }
 }

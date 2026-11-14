@@ -1447,14 +1447,20 @@ public abstract class AbstractWebFrontendMenuOptions<S extends AbstractWebFronte
         baseComponentPart.rehydrate(element);
         setRehydration(element);
         // Todo: replace with storeinelementoptions
-        String anchorPositionString = element.getAttribute("data-anchorposition");
-        if ((anchorPositionString != null) && (!anchorPositionString.isEmpty()))
-            setAnchorPosition(Position.valueOf(anchorPositionString.toUpperCase()));
+        if (getOption("anchorPosition") == null || getOption("anchorPosition") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String anchorPositionString = element.getAttribute("data-anchorposition");
+            if ((anchorPositionString != null) && (!anchorPositionString.isEmpty()))
+                setAnchorPosition(Position.valueOf(anchorPositionString.toUpperCase()));
 
-        String menuPositionString = element.getAttribute("data-menuposition");
-        if ((menuPositionString != null) && (!menuPositionString.isEmpty()))
-            setMenuPosition(Position.valueOf(menuPositionString.toUpperCase()));
+            if (getOption("anchorPosition") != null && !(getOption("anchorPosition") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("anchorPosition", dev.reuise.core.option.RehydratedComponentOption.from(getOption("anchorPosition")));
+        }
+        if (getOption("menuPosition") == null || getOption("menuPosition") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String menuPositionString = element.getAttribute("data-menuposition");
+            if ((menuPositionString != null) && (!menuPositionString.isEmpty()))
+                setMenuPosition(Position.valueOf(menuPositionString.toUpperCase()));
 
+            if (getOption("menuPosition") != null && !(getOption("menuPosition") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("menuPosition", dev.reuise.core.option.RehydratedComponentOption.from(getOption("menuPosition")));
+        }
         Element listElement = element.querySelector(".reuise-menu_list");
         if (listElement != null) {
             if (listOptions == null)

@@ -2310,14 +2310,20 @@ public abstract class AbstractWebFrontendAccordionItemOptions<S extends Abstract
         baseComponentPart.rehydrate(element);
         setRehydration(element);
         // Todo: replace with storeinelementoptions
-        String expandedString = element.getAttribute("data-expanded");
-        if ((expandedString != null) && (!expandedString.isEmpty()))
-            setExpanded(Boolean.parseBoolean(expandedString));
+        if (getOption("expanded") == null || getOption("expanded") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String expandedString = element.getAttribute("data-expanded");
+            if ((expandedString != null) && (!expandedString.isEmpty()))
+                setExpanded(Boolean.parseBoolean(expandedString));
 
-        String toggleAtEndString = element.getAttribute("data-toggleatend");
-        if ((toggleAtEndString != null) && (!toggleAtEndString.isEmpty()))
-            setToggleAtEnd(Boolean.parseBoolean(toggleAtEndString));
+            if (getOption("expanded") != null && !(getOption("expanded") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("expanded", dev.reuise.core.option.RehydratedComponentOption.from(getOption("expanded")));
+        }
+        if (getOption("toggleAtEnd") == null || getOption("toggleAtEnd") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String toggleAtEndString = element.getAttribute("data-toggleatend");
+            if ((toggleAtEndString != null) && (!toggleAtEndString.isEmpty()))
+                setToggleAtEnd(Boolean.parseBoolean(toggleAtEndString));
 
+            if (getOption("toggleAtEnd") != null && !(getOption("toggleAtEnd") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("toggleAtEnd", dev.reuise.core.option.RehydratedComponentOption.from(getOption("toggleAtEnd")));
+        }
         Element headerElement = element.querySelector(".reuise-flexcontainer_header");
         if (headerElement != null) {
             if (headerOptions == null)

@@ -1579,10 +1579,13 @@ public abstract class AbstractWebFrontendNavigationLinkOptions<S extends Abstrac
         baseComponentPart.rehydrate(element);
         setRehydration(element);
         // Todo: replace with storeinelementoptions
-        String activeMatchTypeString = element.getAttribute("data-activematchtype");
-        if ((activeMatchTypeString != null) && (!activeMatchTypeString.isEmpty()))
-            setActiveMatchType(PathMatchType.valueOf(activeMatchTypeString.toUpperCase()));
+        if (getOption("activeMatchType") == null || getOption("activeMatchType") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String activeMatchTypeString = element.getAttribute("data-activematchtype");
+            if ((activeMatchTypeString != null) && (!activeMatchTypeString.isEmpty()))
+                setActiveMatchType(PathMatchType.valueOf(activeMatchTypeString.toUpperCase()));
 
+            if (getOption("activeMatchType") != null && !(getOption("activeMatchType") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("activeMatchType", dev.reuise.core.option.RehydratedComponentOption.from(getOption("activeMatchType")));
+        }
         setActive(element.classList().contains("reuise-navigationlink--active"));
         return true;
     }

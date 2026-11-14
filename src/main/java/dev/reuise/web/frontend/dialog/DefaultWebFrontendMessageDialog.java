@@ -22,6 +22,7 @@ import dev.reuise.web.frontend.WebFrontendComponentFactory;
 import dev.reuise.web.frontend.WebFrontendComponentType;
 import dev.reuise.web.frontend.basecomponent.WebFrontendBaseComponentPart;
 import dev.reuise.web.frontend.button.WebFrontendButton;
+import dev.reuise.web.frontend.button.WebFrontendButtonBar;
 import dev.reuise.web.frontend.event.BooleanEventHandler;
 import dev.reuise.web.frontend.layout.WebFrontendContainer;
 import dev.reuise.web.frontend.layout.WebFrontendFlexContainer;
@@ -219,7 +220,7 @@ public abstract class DefaultWebFrontendMessageDialog<S extends DefaultWebFronte
     }
 
     @Override
-    public WebFrontendFlexContainer getFooter() {
+    public WebFrontendButtonBar getFooter() {
         return dialogPart.getFooter();
     }
 

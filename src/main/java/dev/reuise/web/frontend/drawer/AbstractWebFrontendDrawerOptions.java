@@ -1869,22 +1869,34 @@ public abstract class AbstractWebFrontendDrawerOptions<S extends AbstractWebFron
         baseComponentPart.rehydrate(element);
         setRehydration(element);
         // Todo: replace with storeinelementoptions
-        String resizableString = element.getAttribute("data-resizable");
-        if ((resizableString != null) && (!resizableString.isEmpty()))
-            setResizable(Boolean.parseBoolean(resizableString));
+        if (getOption("resizable") == null || getOption("resizable") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String resizableString = element.getAttribute("data-resizable");
+            if ((resizableString != null) && (!resizableString.isEmpty()))
+                setResizable(Boolean.parseBoolean(resizableString));
 
-        String minSizeString = element.getAttribute("data-minsize");
-        if ((minSizeString != null) && (!minSizeString.isEmpty()))
-            setMinSize(minSizeString);
+            if (getOption("resizable") != null && !(getOption("resizable") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("resizable", dev.reuise.core.option.RehydratedComponentOption.from(getOption("resizable")));
+        }
+        if (getOption("minSize") == null || getOption("minSize") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String minSizeString = element.getAttribute("data-minsize");
+            if ((minSizeString != null) && (!minSizeString.isEmpty()))
+                setMinSize(minSizeString);
 
-        String maxSizeString = element.getAttribute("data-maxsize");
-        if ((maxSizeString != null) && (!maxSizeString.isEmpty()))
-            setMaxSize(maxSizeString);
+            if (getOption("minSize") != null && !(getOption("minSize") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("minSize", dev.reuise.core.option.RehydratedComponentOption.from(getOption("minSize")));
+        }
+        if (getOption("maxSize") == null || getOption("maxSize") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String maxSizeString = element.getAttribute("data-maxsize");
+            if ((maxSizeString != null) && (!maxSizeString.isEmpty()))
+                setMaxSize(maxSizeString);
 
-        String transitionDurationString = element.getAttribute("data-transitionduration");
-        if ((transitionDurationString != null) && (!transitionDurationString.isEmpty()))
-            setTransitionDuration(Integer.parseInt(transitionDurationString));
+            if (getOption("maxSize") != null && !(getOption("maxSize") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("maxSize", dev.reuise.core.option.RehydratedComponentOption.from(getOption("maxSize")));
+        }
+        if (getOption("transitionDuration") == null || getOption("transitionDuration") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String transitionDurationString = element.getAttribute("data-transitionduration");
+            if ((transitionDurationString != null) && (!transitionDurationString.isEmpty()))
+                setTransitionDuration(Integer.parseInt(transitionDurationString));
 
+            if (getOption("transitionDuration") != null && !(getOption("transitionDuration") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("transitionDuration", dev.reuise.core.option.RehydratedComponentOption.from(getOption("transitionDuration")));
+        }
         return true;
     }
 }

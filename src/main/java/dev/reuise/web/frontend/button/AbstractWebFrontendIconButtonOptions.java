@@ -1446,10 +1446,13 @@ public abstract class AbstractWebFrontendIconButtonOptions<S extends AbstractWeb
         baseComponentPart.rehydrate(element);
         setRehydration(element);
         // Todo: replace with storeinelementoptions
-        String useHistoryApiString = element.getAttribute("data-usehistoryapi");
-        if ((useHistoryApiString != null) && (!useHistoryApiString.isEmpty()))
-            setUseHistoryApi(Boolean.parseBoolean(useHistoryApiString));
+        if (getOption("useHistoryApi") == null || getOption("useHistoryApi") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String useHistoryApiString = element.getAttribute("data-usehistoryapi");
+            if ((useHistoryApiString != null) && (!useHistoryApiString.isEmpty()))
+                setUseHistoryApi(Boolean.parseBoolean(useHistoryApiString));
 
+            if (getOption("useHistoryApi") != null && !(getOption("useHistoryApi") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("useHistoryApi", dev.reuise.core.option.RehydratedComponentOption.from(getOption("useHistoryApi")));
+        }
         String urlString = (element.hasAttribute("data-reuise-original-href") ? element.getAttribute("data-reuise-original-href") : element.getAttribute("href"));
         if ((urlString != null) && (!urlString.isEmpty()))
             setUrl(urlString);

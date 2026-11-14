@@ -1955,18 +1955,27 @@ public abstract class AbstractWebFrontendSplitContainerOptions<S extends Abstrac
         baseComponentPart.rehydrate(element);
         setRehydration(element);
         // Todo: replace with storeinelementoptions
-        String directionString = element.getAttribute("data-direction");
-        if ((directionString != null) && (!directionString.isEmpty()))
-            setDirection(SplitDirection.valueOf(directionString.toUpperCase()));
+        if (getOption("direction") == null || getOption("direction") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String directionString = element.getAttribute("data-direction");
+            if ((directionString != null) && (!directionString.isEmpty()))
+                setDirection(SplitDirection.valueOf(directionString.toUpperCase()));
 
-        String reverseDirectionString = element.getAttribute("data-reversedirection");
-        if ((reverseDirectionString != null) && (!reverseDirectionString.isEmpty()))
-            setReverseDirection(Boolean.parseBoolean(reverseDirectionString));
+            if (getOption("direction") != null && !(getOption("direction") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("direction", dev.reuise.core.option.RehydratedComponentOption.from(getOption("direction")));
+        }
+        if (getOption("reverseDirection") == null || getOption("reverseDirection") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String reverseDirectionString = element.getAttribute("data-reversedirection");
+            if ((reverseDirectionString != null) && (!reverseDirectionString.isEmpty()))
+                setReverseDirection(Boolean.parseBoolean(reverseDirectionString));
 
-        String resizableString = element.getAttribute("data-resizable");
-        if ((resizableString != null) && (!resizableString.isEmpty()))
-            setResizable(Boolean.parseBoolean(resizableString));
+            if (getOption("reverseDirection") != null && !(getOption("reverseDirection") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("reverseDirection", dev.reuise.core.option.RehydratedComponentOption.from(getOption("reverseDirection")));
+        }
+        if (getOption("resizable") == null || getOption("resizable") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String resizableString = element.getAttribute("data-resizable");
+            if ((resizableString != null) && (!resizableString.isEmpty()))
+                setResizable(Boolean.parseBoolean(resizableString));
 
+            if (getOption("resizable") != null && !(getOption("resizable") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("resizable", dev.reuise.core.option.RehydratedComponentOption.from(getOption("resizable")));
+        }
         Element containerElement = element.querySelector(".reuise-splitcontainer_container");
         if (containerElement != null) {
             if (containerOptions == null)

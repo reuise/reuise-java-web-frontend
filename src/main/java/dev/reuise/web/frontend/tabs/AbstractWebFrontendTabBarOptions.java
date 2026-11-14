@@ -1909,10 +1909,13 @@ public abstract class AbstractWebFrontendTabBarOptions<S extends AbstractWebFron
         baseComponentPart.rehydrate(element);
         setRehydration(element);
         // Todo: replace with storeinelementoptions
-        String activeTabString = element.getAttribute("data-activetab");
-        if ((activeTabString != null) && (!activeTabString.isEmpty()))
-            setActiveTab(Integer.parseInt(activeTabString));
+        if (getOption("activeTab") == null || getOption("activeTab") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String activeTabString = element.getAttribute("data-activetab");
+            if ((activeTabString != null) && (!activeTabString.isEmpty()))
+                setActiveTab(Integer.parseInt(activeTabString));
 
+            if (getOption("activeTab") != null && !(getOption("activeTab") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("activeTab", dev.reuise.core.option.RehydratedComponentOption.from(getOption("activeTab")));
+        }
         Element containerElement = element.querySelector(".reuise-tabbar_container");
         if (containerElement != null) {
             if (containerOptions == null)

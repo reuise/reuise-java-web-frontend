@@ -1484,10 +1484,13 @@ public abstract class AbstractWebFrontendChipOptions<S extends AbstractWebFronte
         baseComponentPart.rehydrate(element);
         setRehydration(element);
         // Todo: replace with storeinelementoptions
-        String valueString = element.getAttribute("data-value");
-        if ((valueString != null) && (!valueString.isEmpty()))
-            setValue(valueString);
+        if (getOption("value") == null || getOption("value") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String valueString = element.getAttribute("data-value");
+            if ((valueString != null) && (!valueString.isEmpty()))
+                setValue(valueString);
 
+            if (getOption("value") != null && !(getOption("value") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("value", dev.reuise.core.option.RehydratedComponentOption.from(getOption("value")));
+        }
         Element startIconElement = element.querySelector(".reuise-chip_starticon");
         if (startIconElement != null) {
             if (startIconOptions == null)

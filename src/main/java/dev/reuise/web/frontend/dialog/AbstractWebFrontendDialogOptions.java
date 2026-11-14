@@ -7,6 +7,8 @@ import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
 import dev.reuise.core.basecomponent.CoreBaseComponent;
 import dev.reuise.core.button.CoreButton;
+import dev.reuise.core.button.CoreButtonBar;
+import dev.reuise.core.button.CoreButtonBarOptions;
 import dev.reuise.core.button.CoreButtonOptions;
 import dev.reuise.core.layout.CoreContainer;
 import dev.reuise.core.layout.CoreContainerOptions;
@@ -23,6 +25,8 @@ import dev.reuise.web.frontend.ElementDataParser;
 import dev.reuise.web.frontend.ElementProvider;
 import dev.reuise.web.frontend.basecomponent.WebFrontendBaseComponentPartOptions;
 import dev.reuise.web.frontend.button.WebFrontendButton;
+import dev.reuise.web.frontend.button.WebFrontendButtonBar;
+import dev.reuise.web.frontend.button.WebFrontendButtonBarOptions;
 import dev.reuise.web.frontend.button.WebFrontendButtonOptions;
 import dev.reuise.web.frontend.event.BooleanEventHandler;
 import dev.reuise.web.frontend.layout.WebFrontendContainer;
@@ -93,7 +97,7 @@ public abstract class AbstractWebFrontendDialogOptions<S extends AbstractWebFron
 
     protected ComponentCreator<? extends CoreFlexContainer, ? extends CoreFlexContainerOptions> bodyCreator;
 
-    protected ComponentCreator<? extends CoreFlexContainer, ? extends CoreFlexContainerOptions> footerCreator;
+    protected ComponentCreator<? extends CoreButtonBar, ? extends CoreButtonBarOptions> footerCreator;
 
     protected ComponentCreator<? extends CoreContainer, ? extends CoreContainerOptions> scrimCreator;
 
@@ -1462,7 +1466,7 @@ public abstract class AbstractWebFrontendDialogOptions<S extends AbstractWebFron
             if (otherBodyOptions != null)
                 setBodyOptions(otherBodyOptions);
 
-            CoreFlexContainerOptions otherFooterOptions = otherWebFrontendDialogOptions.getFooterOptions();
+            CoreButtonBarOptions otherFooterOptions = otherWebFrontendDialogOptions.getFooterOptions();
             if (otherFooterOptions != null)
                 setFooterOptions(otherFooterOptions);
 
@@ -1577,17 +1581,17 @@ public abstract class AbstractWebFrontendDialogOptions<S extends AbstractWebFron
         return options;
     }
 
-    public ComponentCreator<? extends CoreFlexContainer, ? extends CoreFlexContainerOptions> getFooterCreator() {
+    public ComponentCreator<? extends CoreButtonBar, ? extends CoreButtonBarOptions> getFooterCreator() {
         return footerCreator;
     }
 
-    public S setFooterCreator(ComponentCreator<? extends WebFrontendFlexContainer, ? extends WebFrontendFlexContainerOptions> footerCreator) {
+    public S setFooterCreator(ComponentCreator<? extends WebFrontendButtonBar, ? extends WebFrontendButtonBarOptions> footerCreator) {
         this.footerCreator = footerCreator;
         return self();
     }
 
-    protected WebFrontendFlexContainerOptions createDefaultFooterOptions() {
-        WebFrontendFlexContainerOptions options = ((WebFrontendFlexContainerOptions) (super.createDefaultFooterOptions()));
+    protected WebFrontendButtonBarOptions createDefaultFooterOptions() {
+        WebFrontendButtonBarOptions options = ((WebFrontendButtonBarOptions) (super.createDefaultFooterOptions()));
         return options;
     }
 
@@ -1646,14 +1650,20 @@ public abstract class AbstractWebFrontendDialogOptions<S extends AbstractWebFron
         if ((modalString != null) && (!modalString.isEmpty()))
             setModal(Boolean.parseBoolean(modalString));
 
-        String hasAcceptButtonString = element.getAttribute("data-hasacceptbutton");
-        if ((hasAcceptButtonString != null) && (!hasAcceptButtonString.isEmpty()))
-            setHasAcceptButton(Boolean.parseBoolean(hasAcceptButtonString));
+        if (getOption("hasAcceptButton") == null || getOption("hasAcceptButton") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String hasAcceptButtonString = element.getAttribute("data-hasacceptbutton");
+            if ((hasAcceptButtonString != null) && (!hasAcceptButtonString.isEmpty()))
+                setHasAcceptButton(Boolean.parseBoolean(hasAcceptButtonString));
 
-        String hasCancelButtonString = element.getAttribute("data-hascancelbutton");
-        if ((hasCancelButtonString != null) && (!hasCancelButtonString.isEmpty()))
-            setHasCancelButton(Boolean.parseBoolean(hasCancelButtonString));
+            if (getOption("hasAcceptButton") != null && !(getOption("hasAcceptButton") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("hasAcceptButton", dev.reuise.core.option.RehydratedComponentOption.from(getOption("hasAcceptButton")));
+        }
+        if (getOption("hasCancelButton") == null || getOption("hasCancelButton") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String hasCancelButtonString = element.getAttribute("data-hascancelbutton");
+            if ((hasCancelButtonString != null) && (!hasCancelButtonString.isEmpty()))
+                setHasCancelButton(Boolean.parseBoolean(hasCancelButtonString));
 
+            if (getOption("hasCancelButton") != null && !(getOption("hasCancelButton") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("hasCancelButton", dev.reuise.core.option.RehydratedComponentOption.from(getOption("hasCancelButton")));
+        }
         Element containerElement = element.querySelector(".reuise-dialog_container");
         if (containerElement != null) {
             if (containerOptions == null)
@@ -1692,7 +1702,7 @@ public abstract class AbstractWebFrontendDialogOptions<S extends AbstractWebFron
             if (footerOptions == null)
                 setFooterOptions(createDefaultFooterOptions());
 
-            WebFrontendFlexContainerOptions webFrontendFooterOptions = ((WebFrontendFlexContainerOptions) (footerOptions));
+            WebFrontendButtonBarOptions webFrontendFooterOptions = ((WebFrontendButtonBarOptions) (footerOptions));
             webFrontendFooterOptions.rehydrate(footerElement);
         }
         Element scrimElement = element.querySelector(".reuise-dialog_scrim");

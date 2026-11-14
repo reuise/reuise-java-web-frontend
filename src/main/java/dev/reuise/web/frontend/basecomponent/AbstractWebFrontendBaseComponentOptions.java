@@ -166,14 +166,20 @@ public abstract class AbstractWebFrontendBaseComponentOptions<S extends Abstract
 
         setRehydration(element);
         // Todo: replace with storeinelementoptions
-        String debugString = element.getAttribute("data-debug");
-        if ((debugString != null) && (!debugString.isEmpty()))
-            setDebug(Boolean.parseBoolean(debugString));
+        if (getOption("debug") == null || getOption("debug") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String debugString = element.getAttribute("data-debug");
+            if ((debugString != null) && (!debugString.isEmpty()))
+                setDebug(Boolean.parseBoolean(debugString));
 
-        String debugIdString = element.getAttribute("data-debugid");
-        if ((debugIdString != null) && (!debugIdString.isEmpty()))
-            setDebugId(debugIdString);
+            if (getOption("debug") != null && !(getOption("debug") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("debug", dev.reuise.core.option.RehydratedComponentOption.from(getOption("debug")));
+        }
+        if (getOption("debugId") == null || getOption("debugId") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String debugIdString = element.getAttribute("data-debugid");
+            if ((debugIdString != null) && (!debugIdString.isEmpty()))
+                setDebugId(debugIdString);
 
+            if (getOption("debugId") != null && !(getOption("debugId") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("debugId", dev.reuise.core.option.RehydratedComponentOption.from(getOption("debugId")));
+        }
         return true;
     }
 

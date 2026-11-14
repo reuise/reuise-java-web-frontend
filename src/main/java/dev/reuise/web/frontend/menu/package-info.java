@@ -6,6 +6,8 @@
  * The generated Trigger is a native button: do not give it a URL or replace
  * its button tag. Icons can be supplied through the Trigger's existing icon
  * options without changing the accessible label.
+ * The optional chevron uses a six-pixel, current-color border shape with a
+ * 12-pixel logical start gap and a 160ms translated rotation when expanded.
  *
  * <p>The default {@code ActionMenu=false} is a disclosure: use ordinary links
  * for navigation and ordinary buttons for other disclosure content. It retains

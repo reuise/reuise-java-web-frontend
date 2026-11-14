@@ -1496,19 +1496,25 @@ public abstract class AbstractWebFrontendLinkOptions<S extends AbstractWebFronte
         baseComponentPart.rehydrate(((HTMLElement) (element)));
         setRehydration(((HTMLElement) (element)));
         // Todo: replace with storeinelementoptions
-        String useHistoryApiString = ((HTMLElement) (element)).getAttribute("data-usehistoryapi");
-        if ((useHistoryApiString != null) && (!useHistoryApiString.isEmpty()))
-            setUseHistoryApi(Boolean.parseBoolean(useHistoryApiString));
+        if (getOption("useHistoryApi") == null || getOption("useHistoryApi") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String useHistoryApiString = ((HTMLElement) (element)).getAttribute("data-usehistoryapi");
+            if ((useHistoryApiString != null) && (!useHistoryApiString.isEmpty()))
+                setUseHistoryApi(Boolean.parseBoolean(useHistoryApiString));
 
+            if (getOption("useHistoryApi") != null && !(getOption("useHistoryApi") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("useHistoryApi", dev.reuise.core.option.RehydratedComponentOption.from(getOption("useHistoryApi")));
+        }
         setText(directText(element));
         String urlString = (((HTMLElement) (element)).hasAttribute("data-reuise-original-href") ? ((HTMLElement) (element)).getAttribute("data-reuise-original-href") : ((HTMLElement) (element)).getAttribute("href"));
         if ((urlString != null) && (!urlString.isEmpty()))
             setUrl(urlString);
 
-        String externalIndicatorString = ((HTMLElement) (element)).getAttribute("data-externalindicator");
-        if ((externalIndicatorString != null) && (!externalIndicatorString.isEmpty()))
-            setExternalIndicator(externalIndicatorString);
+        if (getOption("externalIndicator") == null || getOption("externalIndicator") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String externalIndicatorString = ((HTMLElement) (element)).getAttribute("data-externalindicator");
+            if ((externalIndicatorString != null) && (!externalIndicatorString.isEmpty()))
+                setExternalIndicator(externalIndicatorString);
 
+            if (getOption("externalIndicator") != null && !(getOption("externalIndicator") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("externalIndicator", dev.reuise.core.option.RehydratedComponentOption.from(getOption("externalIndicator")));
+        }
         Element startIconElement = ((HTMLElement) (element)).querySelector(":scope > .reuise-link_starticon");
         if (startIconElement != null) {
             if (startIconOptions == null)

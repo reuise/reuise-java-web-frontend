@@ -1933,10 +1933,13 @@ public abstract class AbstractWebFrontendScrollableContainerOptions<S extends Ab
         baseComponentPart.rehydrate(element);
         setRehydration(element);
         // Todo: replace with storeinelementoptions
-        String scrollDirectionString = element.getAttribute("data-scrolldirection");
-        if ((scrollDirectionString != null) && (!scrollDirectionString.isEmpty()))
-            setScrollDirection(ScrollDirection.valueOf(scrollDirectionString.toUpperCase()));
+        if (getOption("scrollDirection") == null || getOption("scrollDirection") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String scrollDirectionString = element.getAttribute("data-scrolldirection");
+            if ((scrollDirectionString != null) && (!scrollDirectionString.isEmpty()))
+                setScrollDirection(ScrollDirection.valueOf(scrollDirectionString.toUpperCase()));
 
+            if (getOption("scrollDirection") != null && !(getOption("scrollDirection") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("scrollDirection", dev.reuise.core.option.RehydratedComponentOption.from(getOption("scrollDirection")));
+        }
         Element scrollAreaBeforeElement = element.querySelector(".reuise-scrollablecontainer_scrollarea_before");
         if (scrollAreaBeforeElement != null) {
             if (scrollAreaBeforeOptions == null)

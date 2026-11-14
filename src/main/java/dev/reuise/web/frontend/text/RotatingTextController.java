@@ -132,6 +132,7 @@ final class RotatingTextController {
             showOnly(index);
             return;
         }
+        if (incoming == null) resizeToActive(false);
         if (timer == -1 && incoming == null && items().length() > 1)
             timer = WindowGlobal.setTimeout(this::advance, dwell);
     }
@@ -150,6 +151,7 @@ final class RotatingTextController {
             return;
         }
         newItem.style().removeProperty("visibility");
+        resizeToActive(true);
         JsPropertyMap<Object> timing = JsPropertyMap.of();
         timing.set("duration", transition);
         timing.set("easing", "ease-in-out");
@@ -180,6 +182,29 @@ final class RotatingTextController {
             if (i == active) item.style().removeProperty("visibility");
             else item.style().setProperty("visibility", "hidden");
         }
+        resizeToActive(false);
+    }
+
+    private void resizeToActive(boolean animate) {
+        HTMLElement container = Js.uncheckedCast(root.querySelector("[data-rotating-items]"));
+        NodeList items = items();
+        if (container == null || items.length() == 0 || !root.isConnected()) return;
+        HTMLElement item = Js.uncheckedCast(items.item(index));
+        String oldWidth = item.style().getPropertyValue("width");
+        String priority = item.style().getPropertyPriority("width");
+        item.style().setProperty("width", "max-content");
+        String measured = WindowGlobal.getComputedStyle(item).getPropertyValue("width");
+        if (oldWidth.isEmpty()) item.style().removeProperty("width");
+        else item.style().setProperty("width", oldWidth, priority);
+        if (!measured.endsWith("px")) return;
+        String width = Math.ceil(Double.parseDouble(measured.substring(0, measured.length() - 2))) + "px";
+        if (animate) {
+            container.style().setProperty("transition", "none");
+            container.style().setProperty("width", container.offsetWidth() + "px");
+            container.getBoundingClientRect();
+        }
+        container.style().setProperty("transition", animate ? "width " + transition + "ms ease-in-out" : "none");
+        container.style().setProperty("width", width);
     }
 
     private void stopTimer() {

@@ -1723,10 +1723,13 @@ public abstract class AbstractWebFrontendChipFieldOptions<S extends AbstractWebF
         baseComponentPart.rehydrate(element);
         setRehydration(element);
         // Todo: replace with storeinelementoptions
-        String multipleString = element.getAttribute("data-multiple");
-        if ((multipleString != null) && (!multipleString.isEmpty()))
-            setMultiple(Boolean.parseBoolean(multipleString));
+        if (getOption("multiple") == null || getOption("multiple") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String multipleString = element.getAttribute("data-multiple");
+            if ((multipleString != null) && (!multipleString.isEmpty()))
+                setMultiple(Boolean.parseBoolean(multipleString));
 
+            if (getOption("multiple") != null && !(getOption("multiple") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("multiple", dev.reuise.core.option.RehydratedComponentOption.from(getOption("multiple")));
+        }
         Element chipGroupElement = element.querySelector(".reuise-textfield_chipgroup");
         if (chipGroupElement != null) {
             if (chipGroupOptions == null)

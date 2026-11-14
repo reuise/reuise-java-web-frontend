@@ -1689,18 +1689,27 @@ public abstract class AbstractWebFrontendFloatingActionButtonOptions<S extends A
         baseComponentPart.rehydrate(element);
         setRehydration(element);
         // Todo: replace with storeinelementoptions
-        String accessibleLabelString = element.getAttribute("data-accessiblelabel");
-        if ((accessibleLabelString != null) && (!accessibleLabelString.isEmpty()))
-            setAccessibleLabel(accessibleLabelString);
+        if (getOption("accessibleLabel") == null || getOption("accessibleLabel") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String accessibleLabelString = element.getAttribute("data-accessiblelabel");
+            if ((accessibleLabelString != null) && (!accessibleLabelString.isEmpty()))
+                setAccessibleLabel(accessibleLabelString);
 
-        String cornerString = element.getAttribute("data-corner");
-        if ((cornerString != null) && (!cornerString.isEmpty()))
-            setCorner(cornerString);
+            if (getOption("accessibleLabel") != null && !(getOption("accessibleLabel") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("accessibleLabel", dev.reuise.core.option.RehydratedComponentOption.from(getOption("accessibleLabel")));
+        }
+        if (getOption("corner") == null || getOption("corner") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String cornerString = element.getAttribute("data-corner");
+            if ((cornerString != null) && (!cornerString.isEmpty()))
+                setCorner(cornerString);
 
-        String unreadCountString = element.getAttribute("data-unreadcount");
-        if ((unreadCountString != null) && (!unreadCountString.isEmpty()))
-            setUnreadCount(Integer.parseInt(unreadCountString));
+            if (getOption("corner") != null && !(getOption("corner") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("corner", dev.reuise.core.option.RehydratedComponentOption.from(getOption("corner")));
+        }
+        if (getOption("unreadCount") == null || getOption("unreadCount") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String unreadCountString = element.getAttribute("data-unreadcount");
+            if ((unreadCountString != null) && (!unreadCountString.isEmpty()))
+                setUnreadCount(Integer.parseInt(unreadCountString));
 
+            if (getOption("unreadCount") != null && !(getOption("unreadCount") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("unreadCount", dev.reuise.core.option.RehydratedComponentOption.from(getOption("unreadCount")));
+        }
         Element badgeElement = element.querySelector(".reuise-floatingactionbutton_badge");
         if (badgeElement != null) {
             if (badgeOptions == null)

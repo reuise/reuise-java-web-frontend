@@ -2163,66 +2163,111 @@ public abstract class AbstractWebFrontendChatBoxOptions<S extends AbstractWebFro
         baseComponentPart.rehydrate(element);
         setRehydration(element);
         // Todo: replace with storeinelementoptions
-        String loadingString = element.getAttribute("data-loading");
-        if ((loadingString != null) && (!loadingString.isEmpty()))
-            setLoading(Boolean.parseBoolean(loadingString));
+        if (getOption("loading") == null || getOption("loading") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String loadingString = element.getAttribute("data-loading");
+            if ((loadingString != null) && (!loadingString.isEmpty()))
+                setLoading(Boolean.parseBoolean(loadingString));
 
-        String errorMessageString = element.getAttribute("data-errormessage");
-        if ((errorMessageString != null) && (!errorMessageString.isEmpty()))
-            setErrorMessage(errorMessageString);
+            if (getOption("loading") != null && !(getOption("loading") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("loading", dev.reuise.core.option.RehydratedComponentOption.from(getOption("loading")));
+        }
+        if (getOption("errorMessage") == null || getOption("errorMessage") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String errorMessageString = element.getAttribute("data-errormessage");
+            if ((errorMessageString != null) && (!errorMessageString.isEmpty()))
+                setErrorMessage(errorMessageString);
 
-        String handoffStatusString = element.getAttribute("data-handoffstatus");
-        if ((handoffStatusString != null) && (!handoffStatusString.isEmpty()))
-            setHandoffStatus(handoffStatusString);
+            if (getOption("errorMessage") != null && !(getOption("errorMessage") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("errorMessage", dev.reuise.core.option.RehydratedComponentOption.from(getOption("errorMessage")));
+        }
+        if (getOption("handoffStatus") == null || getOption("handoffStatus") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String handoffStatusString = element.getAttribute("data-handoffstatus");
+            if ((handoffStatusString != null) && (!handoffStatusString.isEmpty()))
+                setHandoffStatus(handoffStatusString);
 
-        String handoffMessageString = element.getAttribute("data-handoffmessage");
-        if ((handoffMessageString != null) && (!handoffMessageString.isEmpty()))
-            setHandoffMessage(handoffMessageString);
+            if (getOption("handoffStatus") != null && !(getOption("handoffStatus") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("handoffStatus", dev.reuise.core.option.RehydratedComponentOption.from(getOption("handoffStatus")));
+        }
+        if (getOption("handoffMessage") == null || getOption("handoffMessage") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String handoffMessageString = element.getAttribute("data-handoffmessage");
+            if ((handoffMessageString != null) && (!handoffMessageString.isEmpty()))
+                setHandoffMessage(handoffMessageString);
 
-        String handoffRequestedLabelString = element.getAttribute("data-handoffrequestedlabel");
-        if ((handoffRequestedLabelString != null) && (!handoffRequestedLabelString.isEmpty()))
-            setHandoffRequestedLabel(handoffRequestedLabelString);
+            if (getOption("handoffMessage") != null && !(getOption("handoffMessage") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("handoffMessage", dev.reuise.core.option.RehydratedComponentOption.from(getOption("handoffMessage")));
+        }
+        if (getOption("handoffRequestedLabel") == null || getOption("handoffRequestedLabel") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String handoffRequestedLabelString = element.getAttribute("data-handoffrequestedlabel");
+            if ((handoffRequestedLabelString != null) && (!handoffRequestedLabelString.isEmpty()))
+                setHandoffRequestedLabel(handoffRequestedLabelString);
 
-        String handoffConnectedLabelString = element.getAttribute("data-handoffconnectedlabel");
-        if ((handoffConnectedLabelString != null) && (!handoffConnectedLabelString.isEmpty()))
-            setHandoffConnectedLabel(handoffConnectedLabelString);
+            if (getOption("handoffRequestedLabel") != null && !(getOption("handoffRequestedLabel") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("handoffRequestedLabel", dev.reuise.core.option.RehydratedComponentOption.from(getOption("handoffRequestedLabel")));
+        }
+        if (getOption("handoffConnectedLabel") == null || getOption("handoffConnectedLabel") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String handoffConnectedLabelString = element.getAttribute("data-handoffconnectedlabel");
+            if ((handoffConnectedLabelString != null) && (!handoffConnectedLabelString.isEmpty()))
+                setHandoffConnectedLabel(handoffConnectedLabelString);
 
-        String handoffUnavailableLabelString = element.getAttribute("data-handoffunavailablelabel");
-        if ((handoffUnavailableLabelString != null) && (!handoffUnavailableLabelString.isEmpty()))
-            setHandoffUnavailableLabel(handoffUnavailableLabelString);
+            if (getOption("handoffConnectedLabel") != null && !(getOption("handoffConnectedLabel") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("handoffConnectedLabel", dev.reuise.core.option.RehydratedComponentOption.from(getOption("handoffConnectedLabel")));
+        }
+        if (getOption("handoffUnavailableLabel") == null || getOption("handoffUnavailableLabel") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String handoffUnavailableLabelString = element.getAttribute("data-handoffunavailablelabel");
+            if ((handoffUnavailableLabelString != null) && (!handoffUnavailableLabelString.isEmpty()))
+                setHandoffUnavailableLabel(handoffUnavailableLabelString);
 
-        String messagesLabelString = element.getAttribute("data-messageslabel");
-        if ((messagesLabelString != null) && (!messagesLabelString.isEmpty()))
-            setMessagesLabel(messagesLabelString);
+            if (getOption("handoffUnavailableLabel") != null && !(getOption("handoffUnavailableLabel") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("handoffUnavailableLabel", dev.reuise.core.option.RehydratedComponentOption.from(getOption("handoffUnavailableLabel")));
+        }
+        if (getOption("messagesLabel") == null || getOption("messagesLabel") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String messagesLabelString = element.getAttribute("data-messageslabel");
+            if ((messagesLabelString != null) && (!messagesLabelString.isEmpty()))
+                setMessagesLabel(messagesLabelString);
 
-        String composerLabelString = element.getAttribute("data-composerlabel");
-        if ((composerLabelString != null) && (!composerLabelString.isEmpty()))
-            setComposerLabel(composerLabelString);
+            if (getOption("messagesLabel") != null && !(getOption("messagesLabel") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("messagesLabel", dev.reuise.core.option.RehydratedComponentOption.from(getOption("messagesLabel")));
+        }
+        if (getOption("composerLabel") == null || getOption("composerLabel") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String composerLabelString = element.getAttribute("data-composerlabel");
+            if ((composerLabelString != null) && (!composerLabelString.isEmpty()))
+                setComposerLabel(composerLabelString);
 
-        String composerPlaceholderString = element.getAttribute("data-composerplaceholder");
-        if ((composerPlaceholderString != null) && (!composerPlaceholderString.isEmpty()))
-            setComposerPlaceholder(composerPlaceholderString);
+            if (getOption("composerLabel") != null && !(getOption("composerLabel") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("composerLabel", dev.reuise.core.option.RehydratedComponentOption.from(getOption("composerLabel")));
+        }
+        if (getOption("composerPlaceholder") == null || getOption("composerPlaceholder") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String composerPlaceholderString = element.getAttribute("data-composerplaceholder");
+            if ((composerPlaceholderString != null) && (!composerPlaceholderString.isEmpty()))
+                setComposerPlaceholder(composerPlaceholderString);
 
-        String sendLabelString = element.getAttribute("data-sendlabel");
-        if ((sendLabelString != null) && (!sendLabelString.isEmpty()))
-            setSendLabel(sendLabelString);
+            if (getOption("composerPlaceholder") != null && !(getOption("composerPlaceholder") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("composerPlaceholder", dev.reuise.core.option.RehydratedComponentOption.from(getOption("composerPlaceholder")));
+        }
+        if (getOption("sendLabel") == null || getOption("sendLabel") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String sendLabelString = element.getAttribute("data-sendlabel");
+            if ((sendLabelString != null) && (!sendLabelString.isEmpty()))
+                setSendLabel(sendLabelString);
 
-        String stopLabelString = element.getAttribute("data-stoplabel");
-        if ((stopLabelString != null) && (!stopLabelString.isEmpty()))
-            setStopLabel(stopLabelString);
+            if (getOption("sendLabel") != null && !(getOption("sendLabel") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("sendLabel", dev.reuise.core.option.RehydratedComponentOption.from(getOption("sendLabel")));
+        }
+        if (getOption("stopLabel") == null || getOption("stopLabel") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String stopLabelString = element.getAttribute("data-stoplabel");
+            if ((stopLabelString != null) && (!stopLabelString.isEmpty()))
+                setStopLabel(stopLabelString);
 
-        String retryLabelString = element.getAttribute("data-retrylabel");
-        if ((retryLabelString != null) && (!retryLabelString.isEmpty()))
-            setRetryLabel(retryLabelString);
+            if (getOption("stopLabel") != null && !(getOption("stopLabel") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("stopLabel", dev.reuise.core.option.RehydratedComponentOption.from(getOption("stopLabel")));
+        }
+        if (getOption("retryLabel") == null || getOption("retryLabel") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String retryLabelString = element.getAttribute("data-retrylabel");
+            if ((retryLabelString != null) && (!retryLabelString.isEmpty()))
+                setRetryLabel(retryLabelString);
 
-        String requestHumanLabelString = element.getAttribute("data-requesthumanlabel");
-        if ((requestHumanLabelString != null) && (!requestHumanLabelString.isEmpty()))
-            setRequestHumanLabel(requestHumanLabelString);
+            if (getOption("retryLabel") != null && !(getOption("retryLabel") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("retryLabel", dev.reuise.core.option.RehydratedComponentOption.from(getOption("retryLabel")));
+        }
+        if (getOption("requestHumanLabel") == null || getOption("requestHumanLabel") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String requestHumanLabelString = element.getAttribute("data-requesthumanlabel");
+            if ((requestHumanLabelString != null) && (!requestHumanLabelString.isEmpty()))
+                setRequestHumanLabel(requestHumanLabelString);
 
-        String loadingLabelString = element.getAttribute("data-loadinglabel");
-        if ((loadingLabelString != null) && (!loadingLabelString.isEmpty()))
-            setLoadingLabel(loadingLabelString);
+            if (getOption("requestHumanLabel") != null && !(getOption("requestHumanLabel") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("requestHumanLabel", dev.reuise.core.option.RehydratedComponentOption.from(getOption("requestHumanLabel")));
+        }
+        if (getOption("loadingLabel") == null || getOption("loadingLabel") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String loadingLabelString = element.getAttribute("data-loadinglabel");
+            if ((loadingLabelString != null) && (!loadingLabelString.isEmpty()))
+                setLoadingLabel(loadingLabelString);
 
+            if (getOption("loadingLabel") != null && !(getOption("loadingLabel") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("loadingLabel", dev.reuise.core.option.RehydratedComponentOption.from(getOption("loadingLabel")));
+        }
         Element floatingPanelElement = element.querySelector(".reuise-chatbox_floatingpanel");
         if (floatingPanelElement != null) {
             if (floatingPanelOptions == null)

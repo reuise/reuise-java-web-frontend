@@ -7,6 +7,8 @@ import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
 import dev.reuise.core.basecomponent.CoreBaseComponent;
 import dev.reuise.core.button.CoreButton;
+import dev.reuise.core.button.CoreButtonBar;
+import dev.reuise.core.button.CoreButtonBarOptions;
 import dev.reuise.core.button.CoreButtonOptions;
 import dev.reuise.core.dialog.DialogSize;
 import dev.reuise.core.layout.CoreContainer;
@@ -24,6 +26,8 @@ import dev.reuise.web.frontend.ElementDataParser;
 import dev.reuise.web.frontend.ElementProvider;
 import dev.reuise.web.frontend.basecomponent.WebFrontendBaseComponentPartOptions;
 import dev.reuise.web.frontend.button.WebFrontendButton;
+import dev.reuise.web.frontend.button.WebFrontendButtonBar;
+import dev.reuise.web.frontend.button.WebFrontendButtonBarOptions;
 import dev.reuise.web.frontend.button.WebFrontendButtonOptions;
 import dev.reuise.web.frontend.event.BooleanEventHandler;
 import dev.reuise.web.frontend.layout.WebFrontendContainer;
@@ -447,23 +451,23 @@ public abstract class AbstractWebFrontendMessageDialogOptions<S extends Abstract
     }
 
     @Override
-    public CoreFlexContainerOptions getFooterOptions() {
+    public CoreButtonBarOptions getFooterOptions() {
         return dialogPart.getFooterOptions();
     }
 
     @Override
-    public S setFooterOptions(CoreFlexContainerOptions footerOptions) {
+    public S setFooterOptions(CoreButtonBarOptions footerOptions) {
         this.dialogPart.setFooterOptions(footerOptions);
         return self();
     }
 
     @Override
-    public ComponentCreator<? extends CoreFlexContainer, ? extends CoreFlexContainerOptions> getFooterCreator() {
+    public ComponentCreator<? extends CoreButtonBar, ? extends CoreButtonBarOptions> getFooterCreator() {
         return dialogPart.getFooterCreator();
     }
 
     @Override
-    public S setFooterCreator(ComponentCreator<? extends WebFrontendFlexContainer, ? extends WebFrontendFlexContainerOptions> footerCreator) {
+    public S setFooterCreator(ComponentCreator<? extends WebFrontendButtonBar, ? extends WebFrontendButtonBarOptions> footerCreator) {
         this.dialogPart.setFooterCreator(footerCreator);
         return self();
     }

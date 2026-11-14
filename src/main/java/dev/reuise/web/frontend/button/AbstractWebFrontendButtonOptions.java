@@ -1494,10 +1494,13 @@ public abstract class AbstractWebFrontendButtonOptions<S extends AbstractWebFron
         baseComponentPart.rehydrate(element);
         setRehydration(element);
         // Todo: replace with storeinelementoptions
-        String useHistoryApiString = element.getAttribute("data-usehistoryapi");
-        if ((useHistoryApiString != null) && (!useHistoryApiString.isEmpty()))
-            setUseHistoryApi(Boolean.parseBoolean(useHistoryApiString));
+        if (getOption("useHistoryApi") == null || getOption("useHistoryApi") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String useHistoryApiString = element.getAttribute("data-usehistoryapi");
+            if ((useHistoryApiString != null) && (!useHistoryApiString.isEmpty()))
+                setUseHistoryApi(Boolean.parseBoolean(useHistoryApiString));
 
+            if (getOption("useHistoryApi") != null && !(getOption("useHistoryApi") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("useHistoryApi", dev.reuise.core.option.RehydratedComponentOption.from(getOption("useHistoryApi")));
+        }
         ButtonType typeClassMatch = Arrays.stream(ButtonType.values()).filter(t -> element.classList().contains("reuise-button--" + t.name().toLowerCase())).findFirst().orElse(null);
         if (typeClassMatch != null)
             setType(typeClassMatch);

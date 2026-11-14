@@ -1923,34 +1923,55 @@ public abstract class AbstractWebFrontendCardGridOptions<S extends AbstractWebFr
         baseComponentPart.rehydrate(element);
         setRehydration(element);
         // Todo: replace with storeinelementoptions
-        String columnGapString = element.getAttribute("data-columngap");
-        if ((columnGapString != null) && (!columnGapString.isEmpty()))
-            setColumnGap(Integer.parseInt(columnGapString));
+        if (getOption("columnGap") == null || getOption("columnGap") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String columnGapString = element.getAttribute("data-columngap");
+            if ((columnGapString != null) && (!columnGapString.isEmpty()))
+                setColumnGap(Integer.parseInt(columnGapString));
 
-        String rowGapString = element.getAttribute("data-rowgap");
-        if ((rowGapString != null) && (!rowGapString.isEmpty()))
-            setRowGap(Integer.parseInt(rowGapString));
+            if (getOption("columnGap") != null && !(getOption("columnGap") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("columnGap", dev.reuise.core.option.RehydratedComponentOption.from(getOption("columnGap")));
+        }
+        if (getOption("rowGap") == null || getOption("rowGap") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String rowGapString = element.getAttribute("data-rowgap");
+            if ((rowGapString != null) && (!rowGapString.isEmpty()))
+                setRowGap(Integer.parseInt(rowGapString));
 
-        String cardWidthString = element.getAttribute("data-cardwidth");
-        if ((cardWidthString != null) && (!cardWidthString.isEmpty()))
-            setCardWidth(Integer.parseInt(cardWidthString));
+            if (getOption("rowGap") != null && !(getOption("rowGap") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("rowGap", dev.reuise.core.option.RehydratedComponentOption.from(getOption("rowGap")));
+        }
+        if (getOption("cardWidth") == null || getOption("cardWidth") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String cardWidthString = element.getAttribute("data-cardwidth");
+            if ((cardWidthString != null) && (!cardWidthString.isEmpty()))
+                setCardWidth(Integer.parseInt(cardWidthString));
 
-        String cardHeightString = element.getAttribute("data-cardheight");
-        if ((cardHeightString != null) && (!cardHeightString.isEmpty()))
-            setCardHeight(Integer.parseInt(cardHeightString));
+            if (getOption("cardWidth") != null && !(getOption("cardWidth") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("cardWidth", dev.reuise.core.option.RehydratedComponentOption.from(getOption("cardWidth")));
+        }
+        if (getOption("cardHeight") == null || getOption("cardHeight") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String cardHeightString = element.getAttribute("data-cardheight");
+            if ((cardHeightString != null) && (!cardHeightString.isEmpty()))
+                setCardHeight(Integer.parseInt(cardHeightString));
 
-        String positionModeString = element.getAttribute("data-positionmode");
-        if ((positionModeString != null) && (!positionModeString.isEmpty()))
-            setPositionMode(CardGridPositionMode.valueOf(positionModeString.toUpperCase()));
+            if (getOption("cardHeight") != null && !(getOption("cardHeight") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("cardHeight", dev.reuise.core.option.RehydratedComponentOption.from(getOption("cardHeight")));
+        }
+        if (getOption("positionMode") == null || getOption("positionMode") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String positionModeString = element.getAttribute("data-positionmode");
+            if ((positionModeString != null) && (!positionModeString.isEmpty()))
+                setPositionMode(CardGridPositionMode.valueOf(positionModeString.toUpperCase()));
 
-        String animationEnabledString = element.getAttribute("data-animation");
-        if ((animationEnabledString != null) && (!animationEnabledString.isEmpty()))
-            setAnimationEnabled(Boolean.parseBoolean(animationEnabledString));
+            if (getOption("positionMode") != null && !(getOption("positionMode") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("positionMode", dev.reuise.core.option.RehydratedComponentOption.from(getOption("positionMode")));
+        }
+        if (getOption("animationEnabled") == null || getOption("animationEnabled") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String animationEnabledString = element.getAttribute("data-animation");
+            if ((animationEnabledString != null) && (!animationEnabledString.isEmpty()))
+                setAnimationEnabled(Boolean.parseBoolean(animationEnabledString));
 
-        String expandableCardsString = element.getAttribute("data-expandablecards");
-        if ((expandableCardsString != null) && (!expandableCardsString.isEmpty()))
-            setExpandableCards(Boolean.parseBoolean(expandableCardsString));
+            if (getOption("animationEnabled") != null && !(getOption("animationEnabled") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("animationEnabled", dev.reuise.core.option.RehydratedComponentOption.from(getOption("animationEnabled")));
+        }
+        if (getOption("expandableCards") == null || getOption("expandableCards") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String expandableCardsString = element.getAttribute("data-expandablecards");
+            if ((expandableCardsString != null) && (!expandableCardsString.isEmpty()))
+                setExpandableCards(Boolean.parseBoolean(expandableCardsString));
 
+            if (getOption("expandableCards") != null && !(getOption("expandableCards") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("expandableCards", dev.reuise.core.option.RehydratedComponentOption.from(getOption("expandableCards")));
+        }
         Element scrimElement = element.querySelector(".reuise-cardgrid_scrim");
         if (scrimElement != null) {
             if (scrimOptions == null)

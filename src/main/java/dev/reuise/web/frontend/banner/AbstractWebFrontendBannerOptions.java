@@ -2368,26 +2368,41 @@ public abstract class AbstractWebFrontendBannerOptions<S extends AbstractWebFron
         baseComponentPart.rehydrate(element);
         setRehydration(element);
         // Todo: replace with storeinelementoptions
-        String messageString = element.getAttribute("data-message");
-        if ((messageString != null) && (!messageString.isEmpty()))
-            setMessage(messageString);
+        if (getOption("message") == null || getOption("message") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String messageString = element.getAttribute("data-message");
+            if ((messageString != null) && (!messageString.isEmpty()))
+                setMessage(messageString);
 
-        String campaignIdString = element.getAttribute("data-campaignid");
-        if ((campaignIdString != null) && (!campaignIdString.isEmpty()))
-            setCampaignId(campaignIdString);
+            if (getOption("message") != null && !(getOption("message") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("message", dev.reuise.core.option.RehydratedComponentOption.from(getOption("message")));
+        }
+        if (getOption("campaignId") == null || getOption("campaignId") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String campaignIdString = element.getAttribute("data-campaignid");
+            if ((campaignIdString != null) && (!campaignIdString.isEmpty()))
+                setCampaignId(campaignIdString);
 
-        String toneString = element.getAttribute("data-tone");
-        if ((toneString != null) && (!toneString.isEmpty()))
-            setTone(toneString);
+            if (getOption("campaignId") != null && !(getOption("campaignId") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("campaignId", dev.reuise.core.option.RehydratedComponentOption.from(getOption("campaignId")));
+        }
+        if (getOption("tone") == null || getOption("tone") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String toneString = element.getAttribute("data-tone");
+            if ((toneString != null) && (!toneString.isEmpty()))
+                setTone(toneString);
 
-        String dismissLabelString = element.getAttribute("data-dismisslabel");
-        if ((dismissLabelString != null) && (!dismissLabelString.isEmpty()))
-            setDismissLabel(dismissLabelString);
+            if (getOption("tone") != null && !(getOption("tone") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("tone", dev.reuise.core.option.RehydratedComponentOption.from(getOption("tone")));
+        }
+        if (getOption("dismissLabel") == null || getOption("dismissLabel") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String dismissLabelString = element.getAttribute("data-dismisslabel");
+            if ((dismissLabelString != null) && (!dismissLabelString.isEmpty()))
+                setDismissLabel(dismissLabelString);
 
-        String dismissibleString = element.getAttribute("data-dismissible");
-        if ((dismissibleString != null) && (!dismissibleString.isEmpty()))
-            setDismissible(Boolean.parseBoolean(dismissibleString));
+            if (getOption("dismissLabel") != null && !(getOption("dismissLabel") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("dismissLabel", dev.reuise.core.option.RehydratedComponentOption.from(getOption("dismissLabel")));
+        }
+        if (getOption("dismissible") == null || getOption("dismissible") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String dismissibleString = element.getAttribute("data-dismissible");
+            if ((dismissibleString != null) && (!dismissibleString.isEmpty()))
+                setDismissible(Boolean.parseBoolean(dismissibleString));
 
+            if (getOption("dismissible") != null && !(getOption("dismissible") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("dismissible", dev.reuise.core.option.RehydratedComponentOption.from(getOption("dismissible")));
+        }
         Element iconElement = element.querySelector(".reuise-banner_icon");
         if (iconElement != null) {
             if (iconOptions == null)

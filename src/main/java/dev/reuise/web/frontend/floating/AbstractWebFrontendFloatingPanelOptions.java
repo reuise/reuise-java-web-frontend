@@ -2033,34 +2033,55 @@ public abstract class AbstractWebFrontendFloatingPanelOptions<S extends Abstract
         baseComponentPart.rehydrate(element);
         setRehydration(element);
         // Todo: replace with storeinelementoptions
-        String titleString = element.getAttribute("data-title");
-        if ((titleString != null) && (!titleString.isEmpty()))
-            setTitle(titleString);
+        if (getOption("title") == null || getOption("title") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String titleString = element.getAttribute("data-title");
+            if ((titleString != null) && (!titleString.isEmpty()))
+                setTitle(titleString);
 
-        String closeLabelString = element.getAttribute("data-closelabel");
-        if ((closeLabelString != null) && (!closeLabelString.isEmpty()))
-            setCloseLabel(closeLabelString);
+            if (getOption("title") != null && !(getOption("title") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("title", dev.reuise.core.option.RehydratedComponentOption.from(getOption("title")));
+        }
+        if (getOption("closeLabel") == null || getOption("closeLabel") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String closeLabelString = element.getAttribute("data-closelabel");
+            if ((closeLabelString != null) && (!closeLabelString.isEmpty()))
+                setCloseLabel(closeLabelString);
 
-        String minimiseLabelString = element.getAttribute("data-minimiselabel");
-        if ((minimiseLabelString != null) && (!minimiseLabelString.isEmpty()))
-            setMinimiseLabel(minimiseLabelString);
+            if (getOption("closeLabel") != null && !(getOption("closeLabel") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("closeLabel", dev.reuise.core.option.RehydratedComponentOption.from(getOption("closeLabel")));
+        }
+        if (getOption("minimiseLabel") == null || getOption("minimiseLabel") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String minimiseLabelString = element.getAttribute("data-minimiselabel");
+            if ((minimiseLabelString != null) && (!minimiseLabelString.isEmpty()))
+                setMinimiseLabel(minimiseLabelString);
 
-        String expandedString = element.getAttribute("data-expanded");
-        if ((expandedString != null) && (!expandedString.isEmpty()))
-            setExpanded(Boolean.parseBoolean(expandedString));
+            if (getOption("minimiseLabel") != null && !(getOption("minimiseLabel") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("minimiseLabel", dev.reuise.core.option.RehydratedComponentOption.from(getOption("minimiseLabel")));
+        }
+        if (getOption("expanded") == null || getOption("expanded") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String expandedString = element.getAttribute("data-expanded");
+            if ((expandedString != null) && (!expandedString.isEmpty()))
+                setExpanded(Boolean.parseBoolean(expandedString));
 
-        String minimisedString = element.getAttribute("data-minimised");
-        if ((minimisedString != null) && (!minimisedString.isEmpty()))
-            setMinimised(Boolean.parseBoolean(minimisedString));
+            if (getOption("expanded") != null && !(getOption("expanded") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("expanded", dev.reuise.core.option.RehydratedComponentOption.from(getOption("expanded")));
+        }
+        if (getOption("minimised") == null || getOption("minimised") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String minimisedString = element.getAttribute("data-minimised");
+            if ((minimisedString != null) && (!minimisedString.isEmpty()))
+                setMinimised(Boolean.parseBoolean(minimisedString));
 
-        String dockedString = element.getAttribute("data-docked");
-        if ((dockedString != null) && (!dockedString.isEmpty()))
-            setDocked(Boolean.parseBoolean(dockedString));
+            if (getOption("minimised") != null && !(getOption("minimised") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("minimised", dev.reuise.core.option.RehydratedComponentOption.from(getOption("minimised")));
+        }
+        if (getOption("docked") == null || getOption("docked") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String dockedString = element.getAttribute("data-docked");
+            if ((dockedString != null) && (!dockedString.isEmpty()))
+                setDocked(Boolean.parseBoolean(dockedString));
 
-        String cornerString = element.getAttribute("data-corner");
-        if ((cornerString != null) && (!cornerString.isEmpty()))
-            setCorner(cornerString);
+            if (getOption("docked") != null && !(getOption("docked") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("docked", dev.reuise.core.option.RehydratedComponentOption.from(getOption("docked")));
+        }
+        if (getOption("corner") == null || getOption("corner") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String cornerString = element.getAttribute("data-corner");
+            if ((cornerString != null) && (!cornerString.isEmpty()))
+                setCorner(cornerString);
 
+            if (getOption("corner") != null && !(getOption("corner") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("corner", dev.reuise.core.option.RehydratedComponentOption.from(getOption("corner")));
+        }
         Element triggerElement = element.querySelector(".reuise-floatingpanel_trigger");
         if (triggerElement != null) {
             if (triggerOptions == null)

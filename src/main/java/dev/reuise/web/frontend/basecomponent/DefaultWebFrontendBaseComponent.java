@@ -29,7 +29,9 @@ import dev.reuise.core.RootComponent;
 import dev.reuise.core.ScreenSizeValues;
 import dev.reuise.core.State;
 import dev.reuise.core.event.EventType;
+import dev.reuise.core.option.DefaultComponentOption;
 import dev.reuise.core.option.OptionApplicator;
+import dev.reuise.core.option.RehydratedComponentOption;
 import dev.reuise.core.parentcomponent.CoreParentComponent;
 import dev.reuise.web.core.WebRootComponent;
 import dev.reuise.web.core.basecomponent.DefaultWebBaseComponentPart;
@@ -587,10 +589,14 @@ public abstract class DefaultWebFrontendBaseComponent<S extends DefaultWebFronte
                 ElementDataParser elDataParser = options.getElementDataParser();
                 if (elDataParser != null) {
                     options.getStoreInElementOptions().forEach(o -> {
-                        Object value = elDataParser.parse(o, getData(o));
-                        if (value != null)
-                            options.setOption(o, value);
+                        if ((options.getOption(o) != null) && (!(options.getOption(o) instanceof DefaultComponentOption)))
+                            return;
 
+                        Object value = elDataParser.parse(o, getData(o));
+                        if (value != null) {
+                            options.setOption(o, value);
+                            options.getOptions().put(o, RehydratedComponentOption.from(options.getOption(o)));
+                        }
                     });
                 }
                 if (element.parentElement() == null)

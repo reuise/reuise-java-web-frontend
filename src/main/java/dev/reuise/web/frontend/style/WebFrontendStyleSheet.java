@@ -247,7 +247,7 @@ public class WebFrontendStyleSheet implements StyleSheet {
 
             }
         }
-        int index = sheet.insertRule(("@media " + getStateQuery()) + "{}");
+        int index = sheet.insertRule(("@media " + getStateQuery()) + "{}", sheet.cssRules().length());
         return ((CSSMediaRule) (sheet.cssRules().item(index)));
     }
 
@@ -301,10 +301,10 @@ public class WebFrontendStyleSheet implements StyleSheet {
         boolean isMediaState = (getStateQuery() != null) && (!getStateQuery().isEmpty());
         if (isMediaState) {
             CSSMediaRule mediaRule = findOrCreateMediaRule(sheet);
-            int index = mediaRule.insertRule(selector + "{}");
+            int index = mediaRule.insertRule(selector + "{}", mediaRule.cssRules().length());
             cssRule = ((CSSStyleRule) (mediaRule.cssRules().item(index)));
         } else {
-            int index = sheet.insertRule(selector + "{}");
+            int index = sheet.insertRule(selector + "{}", sheet.cssRules().length());
             cssRule = ((CSSStyleRule) (sheet.cssRules().item(index)));
         }
         Style style = new StyleAdapter(cssRule.style(), null);
@@ -343,7 +343,7 @@ public class WebFrontendStyleSheet implements StyleSheet {
             int index = mediaRule.insertRule(("@" + selector) + "{}", mediaRule.cssRules().length());
             cssRule = mediaRule.cssRules().item(index);
         } else {
-            int index = sheet.insertRule(("@" + selector) + "{}");
+            int index = sheet.insertRule(("@" + selector) + "{}", sheet.cssRules().length());
             cssRule = sheet.cssRules().item(index);
         }
         if ((cssRule instanceof CSSGroupingRule) || (cssRule instanceof CSSKeyframesRule)) {

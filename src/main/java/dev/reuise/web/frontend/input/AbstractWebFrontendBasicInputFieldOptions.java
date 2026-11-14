@@ -1403,10 +1403,13 @@ public abstract class AbstractWebFrontendBasicInputFieldOptions<S extends Abstra
         if ((minLinesString != null) && (!minLinesString.isEmpty()))
             setMinLines(Integer.parseInt(minLinesString));
 
-        String maxLinesString = element.getAttribute("data-maxlines");
-        if ((maxLinesString != null) && (!maxLinesString.isEmpty()))
-            setMaxLines(Integer.parseInt(maxLinesString));
+        if (getOption("maxLines") == null || getOption("maxLines") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String maxLinesString = element.getAttribute("data-maxlines");
+            if ((maxLinesString != null) && (!maxLinesString.isEmpty()))
+                setMaxLines(Integer.parseInt(maxLinesString));
 
+            if (getOption("maxLines") != null && !(getOption("maxLines") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("maxLines", dev.reuise.core.option.RehydratedComponentOption.from(getOption("maxLines")));
+        }
         String readOnlyString = element.getAttribute("readonly");
         if ((readOnlyString != null) && (!readOnlyString.isEmpty()))
             setReadOnly(Boolean.parseBoolean(readOnlyString));

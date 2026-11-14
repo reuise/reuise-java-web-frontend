@@ -1918,22 +1918,34 @@ public abstract class AbstractWebFrontendMenuButtonOptions<S extends AbstractWeb
         baseComponentPart.rehydrate(element);
         setRehydration(element);
         // Todo: replace with storeinelementoptions
-        String labelString = element.getAttribute("data-label");
-        if ((labelString != null) && (!labelString.isEmpty()))
-            setLabel(labelString);
+        if (getOption("label") == null || getOption("label") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String labelString = element.getAttribute("data-label");
+            if ((labelString != null) && (!labelString.isEmpty()))
+                setLabel(labelString);
 
-        String expandedString = element.getAttribute("data-expanded");
-        if ((expandedString != null) && (!expandedString.isEmpty()))
-            setExpanded(Boolean.parseBoolean(expandedString));
+            if (getOption("label") != null && !(getOption("label") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("label", dev.reuise.core.option.RehydratedComponentOption.from(getOption("label")));
+        }
+        if (getOption("expanded") == null || getOption("expanded") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String expandedString = element.getAttribute("data-expanded");
+            if ((expandedString != null) && (!expandedString.isEmpty()))
+                setExpanded(Boolean.parseBoolean(expandedString));
 
-        String actionMenuString = element.getAttribute("data-actionmenu");
-        if ((actionMenuString != null) && (!actionMenuString.isEmpty()))
-            setActionMenu(Boolean.parseBoolean(actionMenuString));
+            if (getOption("expanded") != null && !(getOption("expanded") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("expanded", dev.reuise.core.option.RehydratedComponentOption.from(getOption("expanded")));
+        }
+        if (getOption("actionMenu") == null || getOption("actionMenu") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String actionMenuString = element.getAttribute("data-actionmenu");
+            if ((actionMenuString != null) && (!actionMenuString.isEmpty()))
+                setActionMenu(Boolean.parseBoolean(actionMenuString));
 
-        String showChevronString = element.getAttribute("data-showchevron");
-        if ((showChevronString != null) && (!showChevronString.isEmpty()))
-            setShowChevron(Boolean.parseBoolean(showChevronString));
+            if (getOption("actionMenu") != null && !(getOption("actionMenu") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("actionMenu", dev.reuise.core.option.RehydratedComponentOption.from(getOption("actionMenu")));
+        }
+        if (getOption("showChevron") == null || getOption("showChevron") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String showChevronString = element.getAttribute("data-showchevron");
+            if ((showChevronString != null) && (!showChevronString.isEmpty()))
+                setShowChevron(Boolean.parseBoolean(showChevronString));
 
+            if (getOption("showChevron") != null && !(getOption("showChevron") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("showChevron", dev.reuise.core.option.RehydratedComponentOption.from(getOption("showChevron")));
+        }
         Element triggerElement = element.querySelector(".reuise-menubutton_trigger");
         if (triggerElement != null) {
             if (triggerOptions == null)

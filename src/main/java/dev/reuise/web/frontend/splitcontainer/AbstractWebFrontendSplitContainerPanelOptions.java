@@ -1873,26 +1873,41 @@ public abstract class AbstractWebFrontendSplitContainerPanelOptions<S extends Ab
         baseComponentPart.rehydrate(element);
         setRehydration(element);
         // Todo: replace with storeinelementoptions
-        String collapsedString = element.getAttribute("data-collapsed");
-        if ((collapsedString != null) && (!collapsedString.isEmpty()))
-            setCollapsed(Boolean.parseBoolean(collapsedString));
+        if (getOption("collapsed") == null || getOption("collapsed") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String collapsedString = element.getAttribute("data-collapsed");
+            if ((collapsedString != null) && (!collapsedString.isEmpty()))
+                setCollapsed(Boolean.parseBoolean(collapsedString));
 
-        String sizeString = element.getAttribute("data-size");
-        if ((sizeString != null) && (!sizeString.isEmpty()))
-            setSize(sizeString);
+            if (getOption("collapsed") != null && !(getOption("collapsed") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("collapsed", dev.reuise.core.option.RehydratedComponentOption.from(getOption("collapsed")));
+        }
+        if (getOption("size") == null || getOption("size") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String sizeString = element.getAttribute("data-size");
+            if ((sizeString != null) && (!sizeString.isEmpty()))
+                setSize(sizeString);
 
-        String minSizeString = element.getAttribute("data-minsize");
-        if ((minSizeString != null) && (!minSizeString.isEmpty()))
-            setMinSize(minSizeString);
+            if (getOption("size") != null && !(getOption("size") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("size", dev.reuise.core.option.RehydratedComponentOption.from(getOption("size")));
+        }
+        if (getOption("minSize") == null || getOption("minSize") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String minSizeString = element.getAttribute("data-minsize");
+            if ((minSizeString != null) && (!minSizeString.isEmpty()))
+                setMinSize(minSizeString);
 
-        String maxSizeString = element.getAttribute("data-maxsize");
-        if ((maxSizeString != null) && (!maxSizeString.isEmpty()))
-            setMaxSize(maxSizeString);
+            if (getOption("minSize") != null && !(getOption("minSize") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("minSize", dev.reuise.core.option.RehydratedComponentOption.from(getOption("minSize")));
+        }
+        if (getOption("maxSize") == null || getOption("maxSize") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String maxSizeString = element.getAttribute("data-maxsize");
+            if ((maxSizeString != null) && (!maxSizeString.isEmpty()))
+                setMaxSize(maxSizeString);
 
-        String directionString = element.getAttribute("data-direction");
-        if ((directionString != null) && (!directionString.isEmpty()))
-            setDirection(SplitDirection.valueOf(directionString.toUpperCase()));
+            if (getOption("maxSize") != null && !(getOption("maxSize") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("maxSize", dev.reuise.core.option.RehydratedComponentOption.from(getOption("maxSize")));
+        }
+        if (getOption("direction") == null || getOption("direction") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String directionString = element.getAttribute("data-direction");
+            if ((directionString != null) && (!directionString.isEmpty()))
+                setDirection(SplitDirection.valueOf(directionString.toUpperCase()));
 
+            if (getOption("direction") != null && !(getOption("direction") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("direction", dev.reuise.core.option.RehydratedComponentOption.from(getOption("direction")));
+        }
         return true;
     }
 }

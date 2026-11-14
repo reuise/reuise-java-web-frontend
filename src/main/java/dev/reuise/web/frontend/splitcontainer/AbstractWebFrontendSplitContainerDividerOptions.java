@@ -1860,10 +1860,13 @@ public abstract class AbstractWebFrontendSplitContainerDividerOptions<S extends 
         baseComponentPart.rehydrate(element);
         setRehydration(element);
         // Todo: replace with storeinelementoptions
-        String thicknessString = element.getAttribute("data-thickness");
-        if ((thicknessString != null) && (!thicknessString.isEmpty()))
-            setThickness(Integer.parseInt(thicknessString));
+        if (getOption("thickness") == null || getOption("thickness") instanceof dev.reuise.core.option.DefaultComponentOption) {
+            String thicknessString = element.getAttribute("data-thickness");
+            if ((thicknessString != null) && (!thicknessString.isEmpty()))
+                setThickness(Integer.parseInt(thicknessString));
 
+            if (getOption("thickness") != null && !(getOption("thickness") instanceof dev.reuise.core.option.DefaultComponentOption)) getOptions().put("thickness", dev.reuise.core.option.RehydratedComponentOption.from(getOption("thickness")));
+        }
         return true;
     }
 }
